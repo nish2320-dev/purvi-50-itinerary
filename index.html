@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Madeira Porto Itinerary",
+  "schemaVersion": 1,
+  "description": "Interactive day-by-day Madeira & Porto trip itinerary for a 50th birthday celebration, with a live countdown, tabbed day navigation, and birthday-dinner restaurant comparison cards."
+}
+</script>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madeira &amp; Porto 2026 — Purvi's 50th</title>
+<style>
+  :root{
+    --navy:#1f3864;
+    --navy-dark:#132446;
+    --gold:#c9971f;
+    --gold-light:#f5e6c4;
+    --cream:#faf7f0;
+    --ink:#2b2b2b;
+    --muted:#6b7280;
+    --line:#e6e2d8;
+    color-scheme: light;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#0e2140 0%, #1f3864 220px, var(--cream) 420px);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px 80px;}
+
+  /* HERO */
+  .hero{
+    text-align:center;
+    padding:56px 20px 40px;
+    color:#fff;
+  }
+  .hero .kicker{
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--gold-light);
+    opacity:.9;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-size:clamp(28px,5vw,46px);
+    margin:0 0 10px;
+    font-weight:800;
+    letter-spacing:-0.5px;
+  }
+  .hero .sub{
+    font-size:18px;
+    font-style:italic;
+    color:var(--gold);
+    margin-bottom:6px;
+  }
+  .hero .dates{
+    font-size:14px;
+    color:#cdd7e8;
+  }
+  .countdown{
+    margin:26px auto 0;
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .countdown .box{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    backdrop-filter:blur(4px);
+    border-radius:12px;
+    padding:12px 18px;
+    min-width:72px;
+  }
+  .countdown .num{font-size:26px;font-weight:800;color:#fff;}
+  .countdown .lbl{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gold-light);}
+
+  /* NAV */
+  .nav{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(250,247,240,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:10px 0;
+    margin-bottom:30px;
+  }
+  .nav-inner{
+    max-width:920px;
+    margin:0 auto;
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    padding:0 20px;
+    scrollbar-width:none;
+  }
+  .nav-inner::-webkit-scrollbar{display:none;}
+  .nav-btn{
+    flex:none;
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--navy);
+    font-weight:600;
+    font-size:13px;
+    padding:8px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all .15s ease;
+  }
+  .nav-btn:hover{border-color:var(--gold);}
+  .nav-btn.active{
+    background:var(--navy);
+    border-color:var(--navy);
+    color:#fff;
+  }
+  .nav-btn.bday.active{background:var(--gold);border-color:var(--gold);color:#3a2b00;}
+
+  /* DAY CARD */
+  .day{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    margin-bottom:26px;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,0.04);
+    scroll-margin-top:70px;
+  }
+  .day-head{
+    background:var(--navy);
+    color:#fff;
+    padding:18px 22px;
+  }
+  .day.bday .day-head{
+    background:linear-gradient(120deg,#8a6d00,var(--gold));
+  }
+  .day-head .date{font-size:13px;letter-spacing:1px;text-transform:uppercase;opacity:.85;}
+  .day-head h2{margin:4px 0 0;font-size:20px;}
+  .day-head .theme-sub{font-size:13px;font-style:italic;opacity:.9;margin-top:4px;}
+
+  .timeline{padding:10px 22px 20px;}
+  .item{
+    display:flex;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .item:last-child{border-bottom:none;}
+  .item .time{
+    flex:none;
+    width:100px;
+    font-weight:700;
+    color:var(--navy);
+    font-size:13px;
+    padding-top:2px;
+  }
+  .item .desc{font-size:14.5px;line-height:1.55;color:#333;}
+  .item.highlight .time{color:#8a6d00;}
+  .item.highlight .desc{font-weight:600;}
+  .item.highlight{background:var(--gold-light);border-radius:10px;margin:0 -12px;padding:14px 12px;border-bottom:none;}
+
+  /* DINNER CARDS */
+  .section-title{
+    font-size:22px;
+    font-weight:800;
+    color:var(--navy);
+    margin:6px 0 6px;
+  }
+  .section-note{color:var(--muted);font-size:13.5px;margin-bottom:18px;}
+  .dinner-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:16px;
+    margin-bottom:10px;
+  }
+  .dcard{
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px;
+    background:#fff;
+    position:relative;
+  }
+  .dcard.top{
+    border:2px solid var(--gold);
+    background:linear-gradient(180deg,#fffdf6,#fff);
+  }
+  .dcard .badge{
+    position:absolute;top:-11px;left:16px;
+    background:var(--gold);
+    color:#3a2b00;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.5px;
+    padding:4px 10px;
+    border-radius:999px;
+  }
+  .dcard h3{margin:6px 0 2px;font-size:16px;color:var(--navy);}
+  .dcard .meta{font-size:12px;color:var(--muted);margin-bottom:10px;}
+  .dcard .price{
+    display:inline-block;
+    font-size:12px;
+    font-weight:700;
+    color:var(--navy);
+    background:#eef1f7;
+    padding:3px 9px;
+    border-radius:6px;
+    margin-bottom:10px;
+  }
+  .dcard p{font-size:13.5px;line-height:1.5;color:#444;margin:0;}
+
+  .footnote{font-size:12.5px;color:var(--muted);font-style:italic;line-height:1.5;margin-top:6px;}
+
+  /* NOTES */
+  .notes{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px;
+  }
+  .notes ul{margin:0;padding-left:20px;}
+  .notes li{margin-bottom:10px;font-size:14px;line-height:1.5;}
+
+  .toolbar{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .toolbar button{
+    border:1px solid var(--line);
+    background:#fff;
+    color:var(--navy);
+    font-size:12.5px;
+    font-weight:600;
+    padding:7px 12px;
+    border-radius:8px;
+    cursor:pointer;
+  }
+  .toolbar button:hover{border-color:var(--navy);}
+
+  @media print{
+    .nav,.toolbar{display:none;}
+    body{background:#fff;}
+    .day{break-inside:avoid;}
+  }
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    padding:30px 0 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="kicker">Madeira &amp; Porto · Portugal</div>
+  <h1>Purvi's 50th 🎉</h1>
+  <div class="sub">Sept 30 – Oct 6, 2026 · Party of 15</div>
+  <div class="dates" id="countdown-label">Loading countdown…</div>
+  <div class="countdown" id="countdown"></div>
+</div>
+
+<div class="nav">
+  <div class="nav-inner" id="nav-inner"></div>
+</div>
+
+<div class="wrap">
+
+  <div class="toolbar">
+    <button onclick="window.print()">🖨️ Print / Save PDF</button>
+  </div>
+
+  <div id="days"></div>
+
+  <div id="dinner-section"></div>
+
+  <div class="notes">
+    <div class="section-title">Trip Notes</div>
+    <ul>
+      <li>Book the Oct 2 dinner's private room and the catamaran charter first — both are the two hardest reservations to move if the date needs to flex.</li>
+      <li>Confirm exactly how many guests are vegetarian/vegan vs. omnivore when calling Restaurant Horta so they can size the private section and pre-plan the menu.</li>
+      <li>Car rental note: Madeira's roads are steep and full of switchbacks and tunnels; if self-driving with 15 people, plan for at least 2–3 vehicles or a private driver/minibus for the touring days.</li>
+      <li>Weather buffer: Pico do Arieiro clouds over by midday most days — the 7 AM departure on Day 2 is worth protecting.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>Built for the trip · tap a day above to jump straight to it</footer>
+
+<script>
+const days = [
+  {
+    id: "day1", date: "Wed, Sept 30", title: "Day 1 — Arrival & Funchal Old Town", nav: "Day 1",
+    theme: "Land in Funchal, settle in, ease into the island",
+    items: [
+      ["2:15 PM","Land at Funchal (Cristiano Ronaldo) Airport; clear customs, collect luggage, private transfer to hotel (~25 min)."],
+      ["~3:00 PM","Check in at Savoy Palace."],
+      ["4:00 PM","Walk Zona Velha (Old Town): painted door lane, marina, Sé Cathedral. Stop at Mercado dos Lavradores (farmers market) if still open."],
+      ["5:30 PM","Easy stroll along the Levada dos Tornos or the seafront promenade — flat, scenic, an easy way to shake off the flight."],
+      ["8:00 PM","Welcome dinner: Armazém do Sal (Old Town, atmospheric stone cellar, great tuna tartare and Poncha) or O Tasco. Backups for later in the trip: Sabor Tropical, Bistrot des Anges, Dona Nina."]
+    ]
+  },
+  {
+    id: "day2", date: "Thu, Oct 1", title: "Day 2 — Pico do Arieiro & the Wild East", nav: "Day 2",
+    theme: "Sunrise ridge hike, traditional villages, dramatic coastline",
+    items: [
+      ["7:00 AM","Depart hotel (early start avoids midday cloud cover on the peaks)."],
+      ["8:00–11:00 AM","Pico do Arieiro: hike the PR1 ridge trail toward Pico Ruivo. Go 45–75 min in to the narrow ridge/staircase section, a bit further for the view, then turn back. Round trip ~2–3 hrs, 4–6 km, moderate (lots of stairs, big exposure — not for anyone uneasy with heights)."],
+      ["11:30 AM","Drive to Santo da Serra (~25 min) — high plateau farmland. Optional stop at Miradouro da Portela for north-coast cliff views."],
+      ["12:30 PM","Santana: 30–45 min exploring the traditional thatched A-frame houses."],
+      ["1:00 PM","Lunch: Quinta do Furão (cliffside views + local wine) or Cantinho da Serra (more local/traditional)."],
+      ["2:00 PM","Faial Viewpoint — short stop, green terraces meeting the ocean."],
+      ["2:45 PM","Scenic drive to Machico via the old coastal road (ER109/ER101) — twistier, tunnel-free, better views than the highway. Optional coffee/pastel de nata stop in Machico."],
+      ["4:30 PM","Optional add-on: Miradouro da Ponta do Rosto — desert-like cliffs. Skip if the group is tired."],
+      ["6:00 PM","Return to Funchal (~25 min from Machico area)."],
+      ["8:00 PM","Dinner: Casal da Penha — perched terrace, black scabbardfish and lamb chops."]
+    ]
+  },
+  {
+    id: "day3", date: "Fri, Oct 2", title: "Day 3 — Birthday Celebration Day", nav: "🎂 Bday", bday: true,
+    theme: "A lighter morning, a sunset cruise, and a milestone dinner",
+    items: [
+      ["8:00 AM","Optional easy levada walk for early risers: Levada dos Tornos, out-and-back from the hotel (~1 hr). Everyone else sleeps in."],
+      ["10:00 AM","Leisurely hotel brunch."],
+      ["11:00 AM","Monte cable car (10–15 min from hotel): ride up, stroll the Monte Palace Tropical Gardens (~1–1.5 hrs), cable car back down."],
+      ["1:30–4:00 PM","Free time — pool, spa, rest, or last-minute shopping before the big evening."],
+      ["4:30 PM","Depart Funchal Marina: private sunset catamaran for the group of 15 (~3.5–4 hrs). Open bar (champagne, vinho verde, beer), curated playlist, birthday cake on board, sunset photos.", "hl"],
+      ["8:15 PM","Return to marina; short transfer to dinner (build in ~30 min buffer)."],
+      ["8:45 PM","🎉 BIRTHDAY DINNER — Restaurant Horta. Private/semi-private room reserved for the group of 15.", "hl"],
+      ["Late","Nightcap: Savoy Palace rooftop Sky Bar — one last toast under the stars."]
+    ]
+  },
+  {
+    id: "day4", date: "Sat, Oct 3", title: "Day 4 — North Coast & Sea Cliffs", nav: "Day 4",
+    theme: "Black-sand beach, lava pools, Madeira's tallest sea cliff",
+    items: [
+      ["8:30 AM","Depart Savoy Palace, drive west via Ribeira Brava toward the north coast loop."],
+      ["9:45 AM","Praia do Seixal — black-sand beach, 30–45 min: walk the beach, swim if weather allows, photos with the green cliff backdrop."],
+      ["11:00 AM","Porto Moniz natural volcanic pools (~20 min drive) — swim 1.5–2 hrs; early lunch here."],
+      ["1:45 PM","Véu da Noiva waterfall — quick 10–15 min roadside photo stop."],
+      ["2:15 PM","Choose one: Cabo Girão Skywalk (Europe's highest sea-cliff glass platform) or the coastal overlook near Ribeira Brava."],
+      ["4:00 PM","Return toward Funchal; downtime before dinner."],
+      ["7:30 PM","Sunset dinner overlooking the ocean — Avista (Cliff Bay, relaxed sharing-plates, dedicated vegetarian menu) or back to a Day 1 backup for something different."]
+    ]
+  },
+  {
+    id: "day5", date: "Sun, Oct 4", title: "Day 5 — Depart Madeira / Arrive Porto", nav: "Day 5",
+    theme: "Transition day",
+    items: [
+      ["9:00 AM","Quick breakfast; check out."],
+      ["10:00 AM","Leave for Funchal Airport."],
+      ["12:45 PM","Flight departs for Porto."],
+      ["Afternoon","Arrive Porto, check in, drop bags."],
+      ["Evening","Walk the Ribeira district; cross Dom Luís I Bridge on the upper level for the classic river/city view."]
+    ]
+  },
+  {
+    id: "day6", date: "Mon, Oct 5", title: "Day 6 — Porto", nav: "Day 6",
+    theme: "Historic center, tiles, and the Douro",
+    items: [
+      ["Morning","Clérigos Tower; São Bento Station (azulejo tilework); Porto Cathedral."],
+      ["Midday","Douro river cruise (the classic six-bridges route, ~50 min)."],
+      ["Afternoon","Bolhão Market and Rua das Flores."],
+      ["Evening","Port wine tasting at one of the Vila Nova de Gaia wine lodges (Graham's, Taylor's, or Ferreira all offer tours + tastings with river views)."]
+    ]
+  },
+  {
+    id: "day7", date: "Tue, Oct 6", title: "Day 7 — Departure", nav: "Day 7",
+    theme: "Head home",
+    items: [
+      ["Morning","Leave for the airport — confirm flight time and build in a traffic buffer from central Porto."]
+    ]
+  }
+];
+
+const dinnerOptions = [
+  {
+    top:true, badge:"TOP PICK — BEST FOR VEG",
+    name:"Restaurant Horta", meta:"Modern bistronomic · Lido promenade, west Funchal · Michelin-recommended (2024)",
+    price:"€20–50 pp",
+    desc:"Best vegetarian/vegan range of any upscale option in Funchal: vegan starters (flocão with coconut vinaigrette, pea hummus), vegan mains (barley risotto with hazelnut-chive pesto, green lentil curry), roast pepper & carrot hummus. Warm, contemporary room suited to a lively group dinner, not a stiff tasting-menu format. Call +351 291 708 710 to arrange a private section and cake."
+  },
+  {
+    name:"Avista", meta:"Bistronomic, sharing plates · Hotel Les Suites at The Cliff Bay",
+    price:"€25–80 pp",
+    desc:"Has a dedicated vegetarian menu alongside the main share-plates menu, so the table can mix veg and non-veg easily. Relaxed-chic setting, full ocean view — a strong plan B or a more scenic alternative to Horta."
+  },
+  {
+    name:"William Restaurant", meta:"1 Michelin star · Reid's Palace, oceanfront terrace room",
+    price:"€160–190 pp",
+    desc:"Offers vegetarian, vegan, and gluten-free menus and is the most prestigious address of the three, but its strength is refined Portuguese/seafood cuisine — vegetarian guests get accommodated rather than genuinely spoiled for choice. Best if the group wants the Michelin-star occasion and only 2–3 guests are vegetarian."
+  }
+];
+
+function esc(s){return s;}
+
+const daysEl = document.getElementById("days");
+days.forEach(d=>{
+  const dayDiv = document.createElement("div");
+  dayDiv.className = "day" + (d.bday ? " bday" : "");
+  dayDiv.id = d.id;
+  dayDiv.innerHTML = `
+    <div class="day-head">
+      <div class="date">${d.date}</div>
+      <h2>${d.title}</h2>
+      <div class="theme-sub">${d.theme}</div>
+    </div>
+    <div class="timeline">
+      ${d.items.map(it=>`
+        <div class="item ${it[2]==='hl'?'highlight':''}">
+          <div class="time">${it[0]}</div>
+          <div class="desc">${it[1]}</div>
+        </div>`).join("")}
+    </div>
+  `;
+  daysEl.appendChild(dayDiv);
+});
+
+const navEl = document.getElementById("nav-inner");
+days.forEach(d=>{
+  const btn = document.createElement("button");
+  btn.className = "nav-btn" + (d.bday ? " bday" : "");
+  btn.textContent = d.nav;
+  btn.onclick = ()=>{
+    document.getElementById(d.id).scrollIntoView({behavior:"smooth", block:"start"});
+  };
+  navEl.appendChild(btn);
+});
+const dinnerBtn = document.createElement("button");
+dinnerBtn.className = "nav-btn";
+dinnerBtn.textContent = "🍽️ Dinner Picks";
+dinnerBtn.onclick = ()=> document.getElementById("dinner-section").scrollIntoView({behavior:"smooth", block:"start"});
+navEl.appendChild(dinnerBtn);
+
+// highlight nav on scroll
+const navButtons = Array.from(navEl.children);
+const sections = [...days.map(d=>document.getElementById(d.id)), document.getElementById("dinner-section")];
+window.addEventListener("scroll", ()=>{
+  let activeIdx = 0;
+  sections.forEach((sec,i)=>{
+    if(sec.getBoundingClientRect().top < 120) activeIdx = i;
+  });
+  navButtons.forEach((b,i)=> b.classList.toggle("active", i===activeIdx));
+}, {passive:true});
+
+// Dinner section
+const dinnerSection = document.getElementById("dinner-section");
+dinnerSection.innerHTML = `
+  <div class="section-title">🎂 Oct 2 Birthday Dinner — Fine Dining for a Mostly-Vegetarian Group of 15</div>
+  <div class="section-note">All take groups of 15+, within a 5–20 min transfer of Savoy Palace. Book the private room now — Friday availability in early October moves fast.</div>
+  <div class="dinner-grid">
+    ${dinnerOptions.map(o=>`
+      <div class="dcard ${o.top?'top':''}">
+        ${o.badge?`<div class="badge">${o.badge}</div>`:""}
+        <h3>${o.name}</h3>
+        <div class="meta">${o.meta}</div>
+        <div class="price">${o.price}</div>
+        <p>${o.desc}</p>
+      </div>`).join("")}
+  </div>
+  <div class="footnote">Note: Il Gallo d'Oro (2-star, Cliff Bay, ~€255–295pp) and Desarma (1-star, Views Baia) run 8–11 course tasting menus (2.5–3+ hrs) that are harder to adapt heavily vegetarian for 15 and would push a post-cruise dinner past midnight — left off this list for that reason.</div>
+`;
+
+// Countdown
+const tripDate = new Date("2026-09-30T00:00:00");
+function updateCountdown(){
+  const now = new Date();
+  const diff = tripDate - now;
+  const label = document.getElementById("countdown-label");
+  const box = document.getElementById("countdown");
+  if(diff <= 0){
+    label.textContent = "The trip has begun — enjoy every moment! 🎉";
+    box.innerHTML = "";
+    return;
+  }
+  const days_ = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff/(1000*60*60))%24);
+  const mins = Math.floor((diff/(1000*60))%60);
+  label.textContent = "Countdown to Funchal touchdown";
+  box.innerHTML = `
+    <div class="box"><div class="num">${days_}</div><div class="lbl">Days</div></div>
+    <div class="box"><div class="num">${hours}</div><div class="lbl">Hours</div></div>
+    <div class="box"><div class="num">${mins}</div><div class="lbl">Mins</div></div>
+  `;
+}
+updateCountdown();
+setInterval(updateCountdown, 60000);
+</script>
+
+</body>
+</html>
