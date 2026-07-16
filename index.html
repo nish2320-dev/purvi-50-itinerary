@@ -328,16 +328,16 @@ const days = [
   },
   {
     id: "day3", date: "Fri, Oct 2", title: "Day 3 — Birthday Celebration Day", nav: "🎂 Bday", bday: true,
-    theme: "A lighter morning, a sunset cruise, and a milestone dinner",
+    theme: "A relaxed day at the resort, and an early milestone dinner",
     items: [
       ["8:00 AM","Optional easy levada walk for early risers: Levada dos Tornos, out-and-back from the hotel (~1 hr). Everyone else sleeps in."],
       ["10:00 AM","Leisurely hotel brunch."],
       ["11:00 AM","Monte cable car (10–15 min from hotel): ride up, stroll the Monte Palace Tropical Gardens (~1–1.5 hrs), cable car back down."],
-      ["1:30–4:00 PM","Free time — pool, spa, rest, or last-minute shopping before the big evening."],
-      ["4:30 PM","Depart Funchal Marina: private sunset catamaran for the group of 15 (~3.5–4 hrs). Open bar (champagne, vinho verde, beer), curated playlist, birthday cake on board, sunset photos.", "hl"],
-      ["8:15 PM","Return to marina; short transfer to dinner (build in ~30 min buffer)."],
-      ["8:45 PM","🎉 BIRTHDAY DINNER — Restaurant Horta. Private/semi-private room reserved for the group of 15.", "hl"],
-      ["Late","Nightcap: Savoy Palace rooftop Sky Bar — one last toast under the stars."]
+      ["1:30 PM","Private rooftop celebration at Savoy Palace: reserve cabanas at the rooftop infinity pool for the group — drinks, birthday cake, ocean views, zero travel time. Keeps the afternoon relaxed and entirely on-property.", "hl"],
+      ["2:30 PM","Optional: Laurea Spa treatments for anyone who'd rather unwind than poolside — one of the largest spas in Portugal (3,100 m², hammam, Kneipp water path)."],
+      ["5:00 PM","Free time to shower and get ready for dinner."],
+      ["6:30 PM","🎉 EARLY BIRTHDAY DINNER — Restaurant Horta. Private/semi-private room reserved for the group of 15. Starting earlier keeps the night comfortable for the whole group.", "hl"],
+      ["8:30 PM","Nightcap: Savoy Palace rooftop (Galaxia Skyfood / Sky Bar) — one last toast under the stars, no transfer needed."]
     ]
   },
   {
@@ -399,6 +399,22 @@ const dinnerOptions = [
     name:"William Restaurant", meta:"1 Michelin star · Reid's Palace, oceanfront terrace room",
     price:"€160–190 pp",
     desc:"Offers vegetarian, vegan, and gluten-free menus and is the most prestigious address of the three, but its strength is refined Portuguese/seafood cuisine — vegetarian guests get accommodated rather than genuinely spoiled for choice. Best if the group wants the Michelin-star occasion and only 2–3 guests are vegetarian."
+  },
+  {
+    badge:"STRONG ALTERNATIVE",
+    name:"Audax", meta:"Progressive Madeiran cuisine · Chef César Vieira · opened 2023, Michelin-recognized",
+    price:"€85–105 pp (5 or 7-course dinner tasting)",
+    desc:"The only option here with a genuine dedicated 5-course vegetarian tasting menu (plus standalone vegan dishes like eggplant with Madeiran spice and black truffle) rather than an adapted à la carte plate. Private dining and a chef's table are explicitly offered for celebrations. Starting at 6:30 PM, a 5-course tasting should still wrap by ~8:30–9 PM — fits the early-dinner plan well. Contact directly to confirm a private room for 15."
+  },
+  {
+    name:"Restaurant Desarma", meta:"1 Michelin star · The Views Baía, 11th floor panoramic",
+    price:"€195–300 pp",
+    desc:"The splurge option: a full vegan tasting menu alongside the regular one, so vegetarian and omnivore guests both get the genuine Michelin-tasting experience rather than a substitution. Multi-course format (\"Armed with Senses\" / \"Chef's Battle\") runs long and is priciest of the six — group capacity for 15 isn't confirmed, so call ahead before committing."
+  },
+  {
+    name:"JOY Restaurante", meta:"Contemporary Mediterranean/Portuguese · chic room, Old Town",
+    price:"€45–50 pp",
+    desc:"Stylish, well-reviewed (4.7/5), and does host groups/seminars, but no dedicated vegetarian menu is documented — likely a case-by-case kitchen accommodation. Worth a call to confirm depth of vegetarian options and private-room capacity before relying on it for a mostly-veg table of 15."
   }
 ];
 
@@ -457,7 +473,7 @@ window.addEventListener("scroll", ()=>{
 const dinnerSection = document.getElementById("dinner-section");
 dinnerSection.innerHTML = `
   <div class="section-title">🎂 Oct 2 Birthday Dinner — Fine Dining for a Mostly-Vegetarian Group of 15</div>
-  <div class="section-note">All take groups of 15+, within a 5–20 min transfer of Savoy Palace. Book the private room now — Friday availability in early October moves fast.</div>
+  <div class="section-note">Six options, all within a 5–20 min transfer of Savoy Palace. Horta remains the top pick for breadth of vegetarian choice and value; Audax is the strongest alternative if you want the evening to feel more like a proper tasting-menu event. Book the private room now — Friday availability in early October moves fast.</div>
   <div class="dinner-grid">
     ${dinnerOptions.map(o=>`
       <div class="dcard ${o.top?'top':''}">
@@ -468,7 +484,7 @@ dinnerSection.innerHTML = `
         <p>${o.desc}</p>
       </div>`).join("")}
   </div>
-  <div class="footnote">Note: Il Gallo d'Oro (2-star, Cliff Bay, ~€255–295pp) and Desarma (1-star, Views Baia) run 8–11 course tasting menus (2.5–3+ hrs) that are harder to adapt heavily vegetarian for 15 and would push a post-cruise dinner past midnight — left off this list for that reason.</div>
+  <div class="footnote">Note: Il Gallo d'Oro (2-star, Cliff Bay, ~€255–295pp) runs an 8–11 course tasting menu (2.5–3+ hrs) that's the longest and priciest option in Funchal — left off this list, but ask if the group wants to consider it instead of Desarma.</div>
 `;
 
 // Countdown
