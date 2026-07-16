@@ -281,6 +281,8 @@
 
   <div id="days"></div>
 
+  <div id="activities-section"></div>
+
   <div id="dinner-section"></div>
 
   <div class="notes">
@@ -328,16 +330,16 @@ const days = [
   },
   {
     id: "day3", date: "Fri, Oct 2", title: "Day 3 — Birthday Celebration Day", nav: "🎂 Bday", bday: true,
-    theme: "A relaxed day at the resort, and an early milestone dinner",
+    theme: "An easy morning, a private sunset catamaran, and a milestone dinner",
     items: [
       ["8:00 AM","Optional easy levada walk for early risers: Levada dos Tornos, out-and-back from the hotel (~1 hr). Everyone else sleeps in."],
       ["10:00 AM","Leisurely hotel brunch."],
       ["11:00 AM","Monte cable car (10–15 min from hotel): ride up, stroll the Monte Palace Tropical Gardens (~1–1.5 hrs), cable car back down."],
-      ["1:30 PM","Private rooftop celebration at Savoy Palace: reserve cabanas at the rooftop infinity pool for the group — drinks, birthday cake, ocean views, zero travel time. Keeps the afternoon relaxed and entirely on-property.", "hl"],
-      ["2:30 PM","Optional: Laurea Spa treatments for anyone who'd rather unwind than poolside — one of the largest spas in Portugal (3,100 m², hammam, Kneipp water path)."],
-      ["5:00 PM","Free time to shower and get ready for dinner."],
-      ["6:30 PM","🎉 EARLY BIRTHDAY DINNER — Restaurant Horta. Private/semi-private room reserved for the group of 15. Starting earlier keeps the night comfortable for the whole group.", "hl"],
-      ["8:30 PM","Nightcap: Savoy Palace rooftop (Galaxia Skyfood / Sky Bar) — one last toast under the stars, no transfer needed."]
+      ["1:00–3:30 PM","Free time — pool, spa, rest, or last-minute shopping before the big evening."],
+      ["4:00 PM","Depart Funchal Marina: private sunset catamaran charter for the group of 15 (~3.5–4 hrs). Open bar (champagne, vinho verde, beer), curated playlist, birthday cake on board, sunset photos. Two solid operators: VipDolphins (3 hrs, €1,500 flat, up to 17 guests) or Rota dos Cetáceos (3.5 hrs, €2,500 flat, up to 18 guests) — confirm they still run the sunset slot in early October and ask about bringing/arranging a cake.", "hl"],
+      ["7:45 PM","Return to marina; short transfer to dinner (~20–30 min buffer to freshen up)."],
+      ["8:15 PM","🎉 BIRTHDAY DINNER — Restaurant Horta. Private/semi-private room reserved for the group of 15.", "hl"],
+      ["Late","Nightcap: Savoy Palace rooftop (Galaxia Skyfood / Sky Bar) — one last toast under the stars."]
     ]
   },
   {
@@ -380,6 +382,62 @@ const days = [
     items: [
       ["Morning","Leave for the airport — confirm flight time and build in a traffic buffer from central Porto."]
     ]
+  }
+];
+
+const activities = [
+  {
+    badge:"IMPORTANT — 2026 RULE CHANGE",
+    name:"Madeira Hiking Permits (SIMplifica)", meta:"Applies to Levada dos Tornos (Day 1 & 3) and Pico do Arieiro (Day 2)",
+    price:"€4.50 pp per trail · €10.50 pp for full PR1",
+    desc:"As of January 2026, every classified PR trail in Madeira requires an advance online reservation and fee via simplifica.madeira.gov.pt — a 30-minute entry slot, per person, per trail. Rangers check tickets at the trailhead; no ticket, no entry. Book slots for everyone doing the optional walks before you go — morning slots (7:00–8:30) sell out first."
+  },
+  {
+    badge:"FLAG FOR DAY 2 — READ BEFORE BOOKING",
+    name:"Pico do Arieiro / PR1 Ridge Hike", meta:"Day 2 · Vereda do Areeiro, Pico do Arieiro → Pico Ruivo",
+    price:"€10.50 pp (full route) via SIMplifica, or €7 pp through an ICNF protocol tour operator",
+    desc:"Important change for 2026: PR1 is now a one-way point-to-point trail (Areeiro to Pico Ruivo/Achada do Teixeira), and the most exposed ridge section has no safe mid-route turnaround point — the plan's original \"hike in, then turn back the same way\" isn't how the trail works post-reconstruction. Two better options: (1) book a guided tour that includes pickup, drop-off, and return transport (from ~€55pp), or (2) do PR1.2 instead — an out-and-back from Achada do Teixeira (5.6km round trip) that still reaches the Pico Ruivo summit with far less exposure and no transport logistics. Worth deciding which before booking SIMplifica slots for the group."
+  },
+  {
+    name:"Levada dos Tornos Walk", meta:"Day 1 evening & optional Day 3 morning · easy, flat, out-and-back",
+    price:"€4.50 pp (SIMplifica permit required)",
+    desc:"An easy, scenic levada walk close to the hotel — a good way to shake off travel fatigue on Day 1 or ease into the birthday morning on Day 3. Still requires the same SIMplifica booking as the harder trails."
+  },
+  {
+    name:"Monte Cable Car + Tropical Gardens", meta:"Day 3 · ~1.5–2 hrs round trip",
+    price:"~€18–20 pp round trip (combo tickets with garden entry available)",
+    desc:"Cable car up from Funchal (10–15 min), stroll the Monte Palace Tropical Gardens, cable car back down. Buy online in advance to skip the queue, especially since the group is going as a full party of 15."
+  },
+  {
+    top:true, badge:"THE BIG ONE — OCT 2",
+    name:"Private Sunset Catamaran Charter", meta:"Day 3 · Funchal Marina · ~3.5–4 hrs",
+    price:"€1,500–2,500 flat for the group (not per person)",
+    desc:"Exclusive use of the boat, not a shared public tour: open bar (champagne, wine, beer), snorkel gear, music system, and a photo package. Bring your own birthday cake aboard or ask the operator to arrange one. Two solid options — VipDolphins (3 hrs, €1,500 flat, up to 17 guests, +351 924 438 001) or Rota dos Cetáceos (2.5–3.5 hrs, €1,900–2,500 flat, up to 18 guests, +351 918 828 242). Confirm the sunset time slot is still running in early October (days are shorter than mid-summer) — sunset on Oct 2 is around 7:15–7:30 PM."
+  },
+  {
+    name:"Porto Moniz Natural Lava Pools", meta:"Day 4 · ~1.5–2 hrs",
+    price:"€3 pp standard entry (€1.50 seniors/students) or free at the unmanaged pools near São João Batista Fort",
+    desc:"Volcanic seawater pools carved into the coastline. The paid, managed pools have lifeguards, changing rooms, and sunbeds; the free pools nearby have none of that but cost nothing. Parking runs €1.50–2/hr near the site."
+  },
+  {
+    name:"Cabo Girão Skywalk", meta:"Day 4 · ~30–45 min",
+    price:"€5 pp entry (children under 12 free); optional Teleférico do Rancho cable car €10 pp round trip",
+    desc:"Glass-floor viewing platform over Europe's highest sea cliff (580m). Quick stop, dramatic photos — the entry fee rose from €3 to €5 as of January 2026."
+  },
+  {
+    name:"Douro Six Bridges River Cruise", meta:"Day 6 · Porto · ~50 min",
+    price:"~€18–20 pp",
+    desc:"The classic Porto orientation cruise, sailing under all six Douro bridges from Porto to Gaia and back. Departures roughly every 30 minutes; open tickets let you board whichever boat suits the day's timing."
+  },
+  {
+    name:"Port Wine Tasting — Vila Nova de Gaia", meta:"Day 6 · ~1–1.5 hrs",
+    price:"~€15–25 pp for a standard cellar tour + tasting (Taylor's or Graham's); premium masterclasses run higher",
+    desc:"Guided cellar tour plus a flight of ports, with river-view terraces at both Taylor's and Graham's. Book ahead for a group of 15 so the tour operator can plan group logistics and timing."
+  },
+  {
+    name:"Clérigos Tower, São Bento Station & Porto Cathedral", meta:"Day 6 · self-paced sightseeing",
+    price:"Clérigos Tower ~€8 pp; São Bento's tiled main hall is free to view; Cathedral cloister ~€3 pp (confirm current price)",
+    desc:"Clérigos Tower has 240 steps to a rooftop view over Porto; São Bento Station's azulejo tile murals are free and open to the public; Porto Cathedral's nave is free, with a small fee for the cloister."
   }
 ];
 
@@ -452,6 +510,12 @@ days.forEach(d=>{
   };
   navEl.appendChild(btn);
 });
+const activitiesBtn = document.createElement("button");
+activitiesBtn.className = "nav-btn";
+activitiesBtn.textContent = "🎟️ Activities";
+activitiesBtn.onclick = ()=> document.getElementById("activities-section").scrollIntoView({behavior:"smooth", block:"start"});
+navEl.appendChild(activitiesBtn);
+
 const dinnerBtn = document.createElement("button");
 dinnerBtn.className = "nav-btn";
 dinnerBtn.textContent = "🍽️ Dinner Picks";
@@ -460,7 +524,7 @@ navEl.appendChild(dinnerBtn);
 
 // highlight nav on scroll
 const navButtons = Array.from(navEl.children);
-const sections = [...days.map(d=>document.getElementById(d.id)), document.getElementById("dinner-section")];
+const sections = [...days.map(d=>document.getElementById(d.id)), document.getElementById("activities-section"), document.getElementById("dinner-section")];
 window.addEventListener("scroll", ()=>{
   let activeIdx = 0;
   sections.forEach((sec,i)=>{
@@ -468,6 +532,23 @@ window.addEventListener("scroll", ()=>{
   });
   navButtons.forEach((b,i)=> b.classList.toggle("active", i===activeIdx));
 }, {passive:true});
+
+// Activities section
+const activitiesSection = document.getElementById("activities-section");
+activitiesSection.innerHTML = `
+  <div class="section-title">🎟️ Activities — Details, Pricing & Booking Notes</div>
+  <div class="section-note">Every named activity across the trip, in one place. Two flags worth reading before you book anything: Madeira introduced mandatory hiking permits in January 2026, and the Pico do Arieiro route changed shape after trail reconstruction.</div>
+  <div class="dinner-grid">
+    ${activities.map(o=>`
+      <div class="dcard ${o.top?'top':''}">
+        ${o.badge?`<div class="badge">${o.badge}</div>`:""}
+        <h3>${o.name}</h3>
+        <div class="meta">${o.meta}</div>
+        <div class="price">${o.price}</div>
+        <p>${o.desc}</p>
+      </div>`).join("")}
+  </div>
+`;
 
 // Dinner section
 const dinnerSection = document.getElementById("dinner-section");
