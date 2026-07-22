@@ -213,6 +213,17 @@
     border-radius:6px;
     margin-bottom:10px;
   }
+  .dcard .status{
+    display:inline-block;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:.3px;
+    padding:3px 10px;
+    border-radius:999px;
+    margin-bottom:10px;
+  }
+  .dcard .status.confirmed{background:#dcf5e3;color:#1e7a3c;}
+  .dcard .status.pending{background:#fdecc8;color:#8a6d00;}
   .dcard p{font-size:13.5px;line-height:1.5;color:#444;margin:0;}
 
   .footnote{font-size:12.5px;color:var(--muted);font-style:italic;line-height:1.5;margin-top:6px;}
@@ -309,7 +320,7 @@ const days = [
       ["~3:00 PM","Check in at Savoy Palace."],
       ["4:00 PM","Walk Zona Velha (Old Town): painted door lane, marina, Sé Cathedral. Stop at Mercado dos Lavradores (farmers market) if still open."],
       ["5:30 PM","Easy stroll along the Levada dos Tornos or the seafront promenade — flat, scenic, an easy way to shake off the flight."],
-      ["8:00 PM","Welcome dinner: Armazém do Sal (Old Town, atmospheric stone cellar, great tuna tartare and Poncha) or O Tasco. Backups for later in the trip: Sabor Tropical, Bistrot des Anges, Dona Nina."]
+      ["8:00 PM","Welcome dinner: Gavino Restaurante Bar (Old Town, balcony seating over a small square) — a proper vegetarian/vegan menu (seitan steak with mushroom sauce, beetroot with coconut) alongside fish and meat, ~€25–30pp, can host groups up to 60. Armazém do Sal and O Tasco are lovely for atmosphere but have nothing meaningful for vegetarians, so Gavino is the safer pick for the group's first night."]
     ]
   },
   {
@@ -330,15 +341,14 @@ const days = [
   },
   {
     id: "day3", date: "Fri, Oct 2", title: "Day 3 — Birthday Celebration Day", nav: "🎂 Bday", bday: true,
-    theme: "An easy morning, a private sunset catamaran, and a milestone dinner",
+    theme: "An easy morning, the famous Monte toboggan, and a milestone dinner",
     items: [
       ["8:00 AM","Optional easy levada walk for early risers: Levada dos Tornos, out-and-back from the hotel (~1 hr). Everyone else sleeps in."],
       ["10:00 AM","Leisurely hotel brunch."],
       ["11:00 AM","Monte cable car (10–15 min from hotel): ride up, stroll the Monte Palace Tropical Gardens (~1–1.5 hrs), cable car back down."],
-      ["1:00–3:30 PM","Free time — pool, spa, rest, or last-minute shopping before the big evening."],
-      ["4:00 PM","Depart Funchal Marina: private sunset catamaran charter for the group of 15 (~3.5–4 hrs). Open bar (champagne, vinho verde, beer), curated playlist, birthday cake on board, sunset photos. Two solid operators: VipDolphins (3 hrs, €1,500 flat, up to 17 guests) or Rota dos Cetáceos (3.5 hrs, €2,500 flat, up to 18 guests) — confirm they still run the sunset slot in early October and ask about bringing/arranging a cake.", "hl"],
-      ["7:45 PM","Return to marina; short transfer to dinner (~20–30 min buffer to freshen up)."],
-      ["8:15 PM","🎉 BIRTHDAY DINNER — Restaurant Horta. Private/semi-private room reserved for the group of 15.", "hl"],
+      ["12:30 PM","🎉 Monte Toboggan Ride (Carros de Cesto): the iconic wicker basket sled, steered by two carreiros in traditional white outfits, coasting ~2km down from Monte to Livramento in about 10 minutes. Cash only, roughly €35 for 2 people (~€250–280 total for the group across ~8 sleds). Arrange a taxi/transfer back to Funchal from Livramento afterward.", "hl"],
+      ["1:30–4:30 PM","Free time — pool, spa, rest, or last-minute shopping before the big evening."],
+      ["7:30 PM","🎂 BIRTHDAY DINNER — Restaurant Horta. Private/semi-private room reserved for the group of 15.", "hl"],
       ["Late","Nightcap: Savoy Palace rooftop (Galaxia Skyfood / Sky Bar) — one last toast under the stars."]
     ]
   },
@@ -352,7 +362,7 @@ const days = [
       ["1:45 PM","Véu da Noiva waterfall — quick 10–15 min roadside photo stop."],
       ["2:15 PM","Choose one: Cabo Girão Skywalk (Europe's highest sea-cliff glass platform) or the coastal overlook near Ribeira Brava."],
       ["4:00 PM","Return toward Funchal; downtime before dinner."],
-      ["7:30 PM","Sunset dinner overlooking the ocean — Avista (Cliff Bay, relaxed sharing-plates, dedicated vegetarian menu) or back to a Day 1 backup for something different."]
+      ["7:30 PM","Dinner: Indian Palace Restaurant — currently Funchal's #1-rated restaurant overall (4.8/5, 3,275+ reviews), full vegetarian/vegan/halal/gluten-free Indian menu, ~€15–20pp. Purvi loves Indian food, so tonight's the night. On Estrada Monumental, a short drive from Savoy Palace — call +351 291 751 039 ahead for a group of 15. Backup: Avista (Cliff Bay, ocean view, dedicated vegetarian menu)."]
     ]
   },
   {
@@ -410,9 +420,9 @@ const activities = [
   },
   {
     top:true, badge:"THE BIG ONE — OCT 2",
-    name:"Private Sunset Catamaran Charter", meta:"Day 3 · Funchal Marina · ~3.5–4 hrs",
-    price:"€1,500–2,500 flat for the group (not per person)",
-    desc:"Exclusive use of the boat, not a shared public tour: open bar (champagne, wine, beer), snorkel gear, music system, and a photo package. Bring your own birthday cake aboard or ask the operator to arrange one. Two solid options — VipDolphins (3 hrs, €1,500 flat, up to 17 guests, +351 924 438 001) or Rota dos Cetáceos (2.5–3.5 hrs, €1,900–2,500 flat, up to 18 guests, +351 918 828 242). Confirm the sunset time slot is still running in early October (days are shorter than mid-summer) — sunset on Oct 2 is around 7:15–7:30 PM."
+    name:"Monte Toboggan Ride (Carros de Cesto)", meta:"Day 3 · Monte → Livramento · ~10 min, ~2 km",
+    price:"Cash only: ~€27.50 for 1 person, €35 for 2, €52.50 for 3 (~€250–280 total for a group of 15)",
+    desc:"Madeira's signature experience: a wicker basket sled steered down a steep paved road by two carreiros in traditional white outfits, a tradition dating to the 1850s. Departs right from the top of the Monte cable car station, so it slots in naturally after the gardens. Open Mon–Sat, 9 AM–6 PM (last run 5:45 PM) — running on Friday Oct 2 is no problem. No cards accepted, so bring cash, and arrange a taxi or transfer from Livramento back to Funchal afterward since it's a one-way ride."
   },
   {
     name:"Porto Moniz Natural Lava Pools", meta:"Day 4 · ~1.5–2 hrs",
@@ -443,36 +453,19 @@ const activities = [
 
 const dinnerOptions = [
   {
-    top:true, badge:"TOP PICK — BEST FOR VEG",
-    name:"Restaurant Horta", meta:"Modern bistronomic · Lido promenade, west Funchal · Michelin-recommended (2024)",
-    price:"€20–50 pp",
-    desc:"Best vegetarian/vegan range of any upscale option in Funchal: vegan starters (flocão with coconut vinaigrette, pea hummus), vegan mains (barley risotto with hazelnut-chive pesto, green lentil curry), roast pepper & carrot hummus. Warm, contemporary room suited to a lively group dinner, not a stiff tasting-menu format. Call +351 291 708 710 to arrange a private section and cake."
+    status:"confirmed",
+    name:"Restaurant Horta", meta:"Day 3 · Fri, Oct 2 — Birthday Dinner · 7:30 PM",
+    desc:"Reservation confirmed. Best vegetarian/vegan range of any upscale option in Funchal: vegan starters (flocão with coconut vinaigrette, pea hummus), vegan mains (barley risotto with hazelnut-chive pesto, green lentil curry), roast pepper & carrot hummus. Private section arranged for the group of 15. Phone: +351 291 708 710."
   },
   {
-    name:"Avista", meta:"Bistronomic, sharing plates · Hotel Les Suites at The Cliff Bay",
-    price:"€25–80 pp",
-    desc:"Has a dedicated vegetarian menu alongside the main share-plates menu, so the table can mix veg and non-veg easily. Relaxed-chic setting, full ocean view — a strong plan B or a more scenic alternative to Horta."
+    status:"confirmed",
+    name:"Indian Palace Restaurant", meta:"Day 4 · Sat, Oct 3 — Dinner · 7:30 PM",
+    desc:"Reservation confirmed. Currently Funchal's #1-rated restaurant overall (4.8/5, 3,275+ reviews), full vegetarian/vegan/halal/gluten-free Indian menu — Purvi loves Indian food, so this is the night for it. Estrada Monumental 197, a short drive from Savoy Palace. Phone: +351 291 751 039."
   },
   {
-    name:"William Restaurant", meta:"1 Michelin star · Reid's Palace, oceanfront terrace room",
-    price:"€160–190 pp",
-    desc:"Offers vegetarian, vegan, and gluten-free menus and is the most prestigious address of the three, but its strength is refined Portuguese/seafood cuisine — vegetarian guests get accommodated rather than genuinely spoiled for choice. Best if the group wants the Michelin-star occasion and only 2–3 guests are vegetarian."
-  },
-  {
-    badge:"STRONG ALTERNATIVE",
-    name:"Audax", meta:"Progressive Madeiran cuisine · Chef César Vieira · opened 2023, Michelin-recognized",
-    price:"€85–105 pp (5 or 7-course dinner tasting)",
-    desc:"The only option here with a genuine dedicated 5-course vegetarian tasting menu (plus standalone vegan dishes like eggplant with Madeiran spice and black truffle) rather than an adapted à la carte plate. Private dining and a chef's table are explicitly offered for celebrations. Starting at 6:30 PM, a 5-course tasting should still wrap by ~8:30–9 PM — fits the early-dinner plan well. Contact directly to confirm a private room for 15."
-  },
-  {
-    name:"Restaurant Desarma", meta:"1 Michelin star · The Views Baía, 11th floor panoramic",
-    price:"€195–300 pp",
-    desc:"The splurge option: a full vegan tasting menu alongside the regular one, so vegetarian and omnivore guests both get the genuine Michelin-tasting experience rather than a substitution. Multi-course format (\"Armed with Senses\" / \"Chef's Battle\") runs long and is priciest of the six — group capacity for 15 isn't confirmed, so call ahead before committing."
-  },
-  {
-    name:"JOY Restaurante", meta:"Contemporary Mediterranean/Portuguese · chic room, Old Town",
-    price:"€45–50 pp",
-    desc:"Stylish, well-reviewed (4.7/5), and does host groups/seminars, but no dedicated vegetarian menu is documented — likely a case-by-case kitchen accommodation. Worth a call to confirm depth of vegetarian options and private-room capacity before relying on it for a mostly-veg table of 15."
+    status:"pending",
+    name:"Avista", meta:"Day 3 · Fri, Oct 2 — Birthday Dinner (alternate) · 7:30 PM",
+    desc:"Inquiry sent, awaiting confirmation. If it comes through in time, this becomes the birthday dinner instead of Horta. Dedicated vegetarian menu alongside the main share-plates menu, relaxed-chic setting with a full ocean view at Les Suites at The Cliff Bay. Phone: +351 291 707 770 or +351 291 707 775. Email: reservations@portobay.pt."
   }
 ];
 
@@ -553,19 +546,17 @@ activitiesSection.innerHTML = `
 // Dinner section
 const dinnerSection = document.getElementById("dinner-section");
 dinnerSection.innerHTML = `
-  <div class="section-title">🎂 Oct 2 Birthday Dinner — Fine Dining for a Mostly-Vegetarian Group of 15</div>
-  <div class="section-note">Six options, all within a 5–20 min transfer of Savoy Palace. Horta remains the top pick for breadth of vegetarian choice and value; Audax is the strongest alternative if you want the evening to feel more like a proper tasting-menu event. Book the private room now — Friday availability in early October moves fast.</div>
+  <div class="section-title">🍽️ Dinner Picks — Confirmed</div>
+  <div class="section-note">The three settled dinner picks for the trip. Indian Palace is locked in for Day 4; Horta is confirmed for the Oct 2 birthday dinner, with Avista as a pending alternate for that same night.</div>
   <div class="dinner-grid">
     ${dinnerOptions.map(o=>`
-      <div class="dcard ${o.top?'top':''}">
-        ${o.badge?`<div class="badge">${o.badge}</div>`:""}
+      <div class="dcard ${o.status==='confirmed'?'top':''}">
+        <div class="status ${o.status}">${o.status==='confirmed'?'✓ CONFIRMED':'⏳ PENDING'}</div>
         <h3>${o.name}</h3>
         <div class="meta">${o.meta}</div>
-        <div class="price">${o.price}</div>
         <p>${o.desc}</p>
       </div>`).join("")}
   </div>
-  <div class="footnote">Note: Il Gallo d'Oro (2-star, Cliff Bay, ~€255–295pp) runs an 8–11 course tasting menu (2.5–3+ hrs) that's the longest and priciest option in Funchal — left off this list, but ask if the group wants to consider it instead of Desarma.</div>
 `;
 
 // Countdown
